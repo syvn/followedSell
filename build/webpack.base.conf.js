@@ -1,24 +1,20 @@
-var path = require('path')
-var utils = require('./utils')
-var config = require('../config')
-var vueLoaderConfig = require('./vue-loader.conf')
+'use strict'
+const path = require('path')
+const utils = require('./utils')
+const config = require('../config')
+const vueLoaderConfig = require('./vue-loader.conf')
 
 function resolve (dir) {
   return path.join(__dirname, '..', dir)
 }
 
 module.exports = {
-  // webpack入口文件
   entry: {
     app: './src/main.js'
   },
-  // webpack输出路径和命名规则
   output: {
-    // webpack输出的目标文件夹路径（例如：/dist）
     path: config.build.assetsRoot,
-    // webpack输出bundle文件命名格式
     filename: '[name].js',
-    // webpack编译输出的发布路径（例如'//cdn.xxx.com/app/'）
     publicPath: process.env.NODE_ENV === 'production'
       ? config.build.assetsPublicPath
       : config.dev.assetsPublicPath
@@ -28,6 +24,7 @@ module.exports = {
     alias: {
       'vue$': 'vue/dist/vue.esm.js',
       '@': resolve('src'),
+      'common': path.resolve(__dirname, '../src/common')
     }
   },
   module: {
