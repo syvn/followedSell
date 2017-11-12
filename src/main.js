@@ -4,6 +4,7 @@ import Vue from 'vue';
 import VueResource from 'vue-resource-2';
 import App from './App';
 import router from './router';
+import store from './vuex/store';
 
 import 'common/stylus/index.styl';
 
@@ -13,6 +14,7 @@ Vue.use(VueResource);
 /* eslint-disable no-new */
 new Vue({
   el: '#app', // 挂载点
+  store,
   router,
   template: '<App/>',
   components: { App }
