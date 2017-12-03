@@ -7,6 +7,10 @@ const state = {
 	// 控制球 事件对象
 	cartcontrol: {
 		element: null
+	},
+	ratings: {
+		selectType: null,
+		onlyContent: false
 	}
 };
 

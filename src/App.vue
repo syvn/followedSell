@@ -12,11 +12,16 @@
         <router-link to="/seller">商家</router-link>
       </div>
     </div>
-    <router-view :seller="seller"></router-view>
+    <keep-alive>
+      <router-view :seller="seller" ></router-view>
+    </keep-alive>
+    
   </div>
 </template>
 
 <script>
+import { urlParse } from '@/common/js/util';
+
 import Header from '@/components/header/Header';
 
 const ERR_OK = 0;
@@ -32,14 +37,19 @@ export default {
         { 'type': 'comment', 'name': '评论', 'selected': false },
         { 'type': 'business', 'name': '商家', 'selected': false }
       ],
-      seller: {}
+      seller: {
+        id: (() => {
+          let queryParam = urlParse();
+          return queryParam.id;
+        })()
+      }
     };
   },
   created() {
-    this.$http.get('/api/seller').then((res) => {
+    this.$http.get('/api/seller?id=' + this.seller.id).then((res) => {
       let data = res.data;
       if(data.errno === ERR_OK) {
-        this.seller = data.data;
+        this.seller = Object.assign({}, this.seller, data.data);
       }
     });
   },
